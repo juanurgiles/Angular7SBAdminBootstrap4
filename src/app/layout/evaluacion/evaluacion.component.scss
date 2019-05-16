@@ -1,0 +1,25 @@
+
+
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item, body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group {
+    margin: 0;
+    padding: 0!important;
+    border: 0 none;
+    color: #333333;
+    background-color: transparent;
+    border-radius: 0;
+}
+.tabla-eval,td, th{
+    border: 1px solid #000;
+    padding: 2px;
+    font-size: 0.9rem;
+}
+.tabla-eval{
+    width: 80%;
+    margin: auto
+}
+.tabla-eval thead> td, th {
+    border: 1px solid #000;
+    background-color: rgb(15,36,64);
+    color: #fff;
+    text-align:center;
+}
