@@ -36,6 +36,18 @@
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
+                        <a routerLink="/evaluacion">
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>{{ 'Evaluacion' | translate }}</span>
+                        </a>
+                    </li>
+                    <li>
+                            <a routerLink="/evaluacion/carrera">
+                                <i class="fa fa-monument"></i>&nbsp;
+                                <span>{{ 'Carrera' | translate }}</span>
+                            </a>
+                        </li>
+                    <!-- <li>
                         <a href="javascript:void(0)">
                             <i class="fa fa-monument"></i>&nbsp;
                             <span>{{ 'Submenu' | translate }}</span>
@@ -46,13 +58,7 @@
                             <i class="fa fa-monument"></i>&nbsp;
                             <span>{{ 'Submenu' | translate }}</span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-monument"></i>&nbsp;
-                            <span>{{ 'Submenu' | translate }}</span>
-                        </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
         </div>

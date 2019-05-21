@@ -35,5 +35,10 @@ export class EvaluacionService {
             .toPromise()
             .then(res => <any[]>res);
     }
-
+    informexCarrera(idCarrera) {
+        return this.http
+            .get(environment.URL_EVALUACION + 'evaluacion/informexcarrera/' + idCarrera)
+            .toPromise()
+            .then(res => <any[]>res);
+    }
 }

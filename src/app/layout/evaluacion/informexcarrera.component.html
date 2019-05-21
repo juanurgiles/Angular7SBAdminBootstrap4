@@ -1,0 +1,86 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col-lg-6">
+            <form role="form">
+                <div class="ui-grid-col-12">
+                    <div class="ui-grid-col-12">
+                        <div class="ui-grid-col-4">
+                            <label class="label-formulario">CARRERA:</label>
+                        </div>
+                        <div class="ui-grid-col-8">
+                            <p-dropdown
+                                name="carrera"
+                                id="carrera"
+                                [options]="carreras"
+                                (onChange)="recuperarEvaluacion()"
+                                [(ngModel)]="carreraSeleccionada"
+                                filter="true"
+                                optionLabel="nombreCarrera"
+                                placeholder="Seleccione una carrera"
+                                appendTo="body"
+                            ></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    [disabled]="!carreraSeleccionada"
+                    (click)="pdf.saveAs('reportePrematriculados.pdf')"
+                    class="btn btn-principal"
+                >
+                    Generar reporte
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- /.row style="position: absolute; left: -1000px; top: 0; width: 1px; height: 1px;" -->
+</div>
+<div class="row">
+    <kendo-pdf-export #pdf paperSize="A4" margin="1.5cm" [scale]="0.45" [repeatHeaders]="!repeatHeaders">
+        <div class="pdf-header">
+            <span class="company-logo">
+                <img width="150px" style="position: absolute;top:100px" src="./assets/images/logo.jpg" />
+                <h4 style="margin:auto; margin-top: 30px; width: 55%" class="text-center">INFORME</h4>
+            </span>
+        </div>
+
+        <div style="margin-left: 150px;margin-right: 150px" class="ui-grid ui-grid-responsive ui-fluid" align="left">
+            <div class="ui-grid-row espacio-10" align="left">
+                <div class="ui-grid-col-12">
+                    <p>
+                        La Comisión de Evaluación Interna del ISTA emite el siguiente informe sobre la calificación promedio de la
+                        evaluación realizada por los estudiantes a los docentes de la carrera de TECNOLOGÍA SUPERIOR EN PROCESAMIENTO
+                        INDUSTRIAL DE LA MADERA en el periodo MAYO 2018- OCTUBRE 2018
+                    </p>
+                </div>
+            </div>
+        </div>
+        <h4 class="text-center">PROMEDIOS DE EVALUACIÓN DOCENTE REALIZADA POR LOS ESTUDIANTES</h4>
+        <table class="tabla-eval">
+            <thead>
+                <tr>
+                    <th style="width:40%">NOMBRE</th>
+                    <th style="width:50%">MATERIA</th>
+                    <th style="width:10%">PROMEDIO</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of revaluacion; let i = index">
+                <tr *ngFor="let item1 of item.eval; let j = index">
+                    <td *ngIf="j == 0" [attr.rowspan]="item.eval.length" scope="row">{{ item.profesor }}</td>
+                    <td class="">{{ item1.descripcionMateria }}</td>
+                    <td class="text-right">
+                        {{ item1.nota }}
+                    </td>
+                </tr>
+            </tbody>
+            <thead>
+                    <tr  >
+                            <td colspan="2" class="text-right font-weight-bold">PROMEDIO PONDERADO TOTAL																				
+                                </td>
+                            <td class="text-right font-weight-bold" >{{promediototal}}</td>
+                        </tr>
+                </thead>
+        </table>
+    </kendo-pdf-export>
+</div>

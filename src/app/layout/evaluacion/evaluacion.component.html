@@ -4,10 +4,10 @@
             <form role="form">
                 <div class="ui-grid-col-12">
                     <div class="ui-grid-col-12">
-                        <div class="ui-grid-col-2">
+                        <div class="ui-grid-col-4">
                             <label class="label-formulario">CARRERA:</label>
                         </div>
-                        <div class="ui-grid-col-10">
+                        <div class="ui-grid-col-8">
                             <p-dropdown
                                 name="carrera"
                                 id="carrera"
@@ -17,17 +17,18 @@
                                 filter="true"
                                 optionLabel="nombreCarrera"
                                 placeholder="Seleccione una carrera"
+                                appendTo="body"
                             ></p-dropdown>
                         </div>
                     </div>
                 </div>
                 <div class="ui-grid-col-12">
                         <div class="ui-grid-col-12">
-                            <div class="ui-grid-col-2">
+                            <div class="ui-grid-col-4">
                                 <label class="label-formulario">DOCENTE:</label>
                             </div>
-                            <div class="ui-grid-col-10">
-                                    <p-dropdown
+                            <div class="ui-grid-col-8" >
+                                    <p-dropdown class="ui-col-8"
                                     name="docente"
                                     id="docente"
                                     [options]="docentes"
@@ -36,16 +37,18 @@
                                     filter="true"
                                     optionLabel="nombreDocente"
                                     placeholder="Seleccione un docente"
+                                    appendTo="body"
+                                    [disabled]="docentes.length==0"
                                 ></p-dropdown>
                             </div>
                         </div>
                     </div>
                     <div class="ui-grid-col-12">
                             <div class="ui-grid-col-12">
-                                <div class="ui-grid-col-2">
+                                <div class="ui-grid-col-4">
                                     <label class="label-formulario">CICLO:</label>
                                 </div>
-                                <div class="ui-grid-col-10">
+                                <div class="ui-grid-col-8">
                                         <p-dropdown
                                         name="ciclo"
                                         id="ciclo"
@@ -55,16 +58,19 @@
                                         filter="true"
                                         optionLabel="idCiclo"
                                         placeholder="Seleccione un ciclo"
+                                        appendTo="body"
+                                        [disabled]="ciclos.length==0"
+
                                     ></p-dropdown>
                                 </div>
                             </div>
                         </div>
                         <div class="ui-grid-col-12">
                                 <div class="ui-grid-col-12">
-                                    <div class="ui-grid-col-2">
+                                    <div class="ui-grid-col-4">
                                         <label class="label-formulario">ASIGNATURA:</label>
                                     </div>
-                                    <div class="ui-grid-col-10">
+                                    <div class="ui-grid-col-8">
                                             <p-dropdown
                                             name="asignatura"
                                             id="asignatura"
@@ -74,91 +80,96 @@
                                             filter="true"
                                             optionLabel="nombreAsignatura"
                                             placeholder="Seleccione una asignatura"
+                                            appendTo="body"
+                                            [disabled]="asignaturas.length==0"
+
                                         ></p-dropdown>
                                     </div>
                                 </div>
                             </div>
              
 
-                <button type="submit" class="btn btn-principal">Generar reporte</button>
-                <button
-                    type="button"
-                    pButton
-                    icon="ui-icon-assignment-turned-in"
-                    (click)="pdf.saveAs('reportePrematriculados.pdf')"
-                    label="Generar PDF"
-                    style="float:right"
-                ></button>
+                <button type="submit" [disabled]="!asignaturaSeleccionada" (click)="pdf.saveAs('reportePrematriculados.pdf')"
+                class="btn btn-principal">Generar reporte</button>
+               
             </form>
         </div>
     </div>
     <!-- /.row -->
+   
+</div>
+<div class="row" style="position: absolute; left: -1000px; top: 0; width: 1px; height: 1px;">
 
-    <kendo-pdf-export #pdf paperSize="A4" margin="1cm" [scale]="0.45"  [repeatHeaders]="!repeatHeaders">
-        <h1 class="centrar-logo-impresion"></h1>
-        <h2 class="text-center">Informe de Evaluación del Docente</h2>
-
-        <div class="ui-grid ui-grid-responsive ui-fluid" align="left">
-            <div class="ui-grid-row espacio-10" align="left">
-                <div class="ui-grid-col-12">
-                    <div class="ui-grid-col-12">
-                        <div class="ui-grid-col-2">
-                            <label class="label-formulario">PERIODO:</label>
-                        </div>
-                        <div class="ui-grid-col-10">MAYO 2018 - OCTUBRE 2018</div>
+        <kendo-pdf-export #pdf paperSize="A4" margin="1.5cm" [scale]="0.45"  [repeatHeaders]="!repeatHeaders">
+                <div class="pdf-header">
+                        <span class="company-logo">
+                            <img width="150px" style="position: absolute;top:100px"  src="./assets/images/logo.jpg" />
+                             <h2 style="margin-top: 30px"class="text-center">Informe de Evaluación del Docente</h2>
+                        </span>
                     </div>
+    
+            <div style="margin-left: 200px" class="ui-grid ui-grid-responsive ui-fluid" align="left">
+                <div class="ui-grid-row espacio-10" align="left">
                     <div class="ui-grid-col-12">
-                        <div class="ui-grid-col-2">
-                            <label class="label-formulario">CARRERA:</label>
+                        <div class="ui-grid-col-12">
+                            <div class="ui-grid-col-2">
+                                <label class="label-formulario">PERIODO:</label>
+                            </div>
+                            <div class="ui-grid-col-10">MAYO 2018 - OCTUBRE 2018</div>
                         </div>
-                        <div class="ui-grid-col-10">{{ this.carreraSeleccionada?.nombreCarrera }}</div>
-                    </div>
-                    <div class="ui-grid-col-12">
-                        <div class="ui-grid-col-2">
-                            <label class="label-formulario">DOCENTE:</label>
+                        <div class="ui-grid-col-12">
+                            <div class="ui-grid-col-2">
+                                <label class="label-formulario">CARRERA:</label>
+                            </div>
+                            <div class="ui-grid-col-10">{{ this.carreraSeleccionada?.nombreCarrera }}</div>
                         </div>
-                        <div class="ui-grid-col-10">{{ this.docenteSeleccionado?.nombreDocente }}</div>
-                    </div>
-                    <div class="ui-grid-col-12">
-                        <div class="ui-grid-col-2">
-                            <label class="label-formulario">CICLO:</label>
+                        <div class="ui-grid-col-12">
+                            <div class="ui-grid-col-2">
+                                <label class="label-formulario">DOCENTE:</label>
+                            </div>
+                            <div class="ui-grid-col-10">{{ this.docenteSeleccionado?.nombreDocente }}</div>
                         </div>
-                        <div class="ui-grid-col-10">{{ this.cicloSeleccionado?.idCiclo }}</div>
-                    </div>
-                    <div class="ui-grid-col-12">
-                        <div class="ui-grid-col-2">
-                            <label class="label-formulario">ASIGNATURA:</label>
+                        <div class="ui-grid-col-12">
+                            <div class="ui-grid-col-2">
+                                <label class="label-formulario">CICLO:</label>
+                            </div>
+                            <div class="ui-grid-col-10">{{ this.cicloSeleccionado?.idCiclo }}</div>
                         </div>
-                        <div class="ui-grid-col-10">{{ this.asignaturaSeleccionada?.nombreAsignatura }}</div>
+                        <div class="ui-grid-col-12">
+                            <div class="ui-grid-col-2">
+                                <label class="label-formulario">ASIGNATURA:</label>
+                            </div>
+                            <div class="ui-grid-col-10">{{ this.asignaturaSeleccionada?.nombreAsignatura }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <h3 class='text-center'>Promedio de Desempeño por Ámbito																					
-        </h3>
-        <table class="tabla-eval">
-                <thead>
-                <tr>
-                    <th style="width:20%">AMBITO</th>
-                    <th  style="width:60%">PREGUNTA</th>
-                    <th  style="width:20%">VALOR</th>
-                    
-                </tr>
-                </thead>
-                <tbody *ngFor="let item of reporteEval; let i = index">
-                <tr *ngFor="let item1 of item.ambitos; let j = index" >
-                    <td *ngIf="j==0" [attr.rowspan]="item.ambitos.length" scope="row">{{item1.descripcionAmbito}}</td>
-                    <td class="{{item.ambitos.length-1==j?'text-right font-weight-bold':''}}">{{item1.descripcionPregunta}}</td>
-                    <td  class="{{item.ambitos.length-1==j?'text-right font-weight-bold':'text-right'}}">{{item1.notaPonderada}}</td>
-                </tr>
-                </tbody>
-                <thead>
-                        <tr  >
-                                <td colspan="2">PROMEDIO PONDERADO TOTAL																				
-                                    </td>
-                                <td >{{promediototal}}</td>
-                            </tr>
+            <h3 class='text-center'>Promedio de Desempeño por Ámbito																					
+            </h3>
+            <table class="tabla-eval">
+                    <thead>
+                    <tr>
+                        <th style="width:20%">AMBITO</th>
+                        <th  style="width:70%">PREGUNTA</th>
+                        <th  style="width:10%">VALOR</th>
+                        
+                    </tr>
                     </thead>
-            </table>
-    </kendo-pdf-export>
-</div>
+                    <tbody *ngFor="let item of reporteEval; let i = index">
+                    <tr *ngFor="let item1 of item.ambitos; let j = index" >
+                        <td *ngIf="j==0" [attr.rowspan]="item.ambitos.length" scope="row">{{item1.descripcionAmbito}}</td>
+                        <td class="{{item.ambitos.length-1==j?'text-right font-weight-bold':''}}">{{item1.descripcionPregunta}}</td>
+                        <td  class="{{item.ambitos.length-1==j?'text-right font-weight-bold':'text-right'}}">{{item1.notaPonderada}}</td>
+                    </tr>
+                    </tbody>
+                    <thead>
+                            <tr  >
+                                    <td colspan="2" class="text-right font-weight-bold">PROMEDIO PONDERADO TOTAL																				
+                                        </td>
+                                    <td class="text-right font-weight-bold" >{{promediototal}}</td>
+                                </tr>
+                        </thead>
+                      
+                </table>
+        </kendo-pdf-export>
+        </div>

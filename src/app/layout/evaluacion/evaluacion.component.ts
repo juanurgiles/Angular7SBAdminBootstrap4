@@ -30,21 +30,34 @@ export class EvaluacionComponent implements OnInit {
     recuperarCiclosDocente() {
         this.evaluacionService.recuperarDocentesxCarrera(this.docenteSeleccionado.idDocente).then(resp => {
             this.ciclos = resp;
+            this.cicloSeleccionado = null;
+            this.asignaturas = [];
+            this.asignaturaSeleccionada = null;
         });
     }
     recuperarDocentes() {
         this.evaluacionService.recuperarDocentesxCarrera(this.carreraSeleccionada.idCarrera).then(resp => {
             this.docentes = resp;
+            this.ciclos = [];
+            this.docenteSeleccionado = null;
+            this.cicloSeleccionado = null;
+            this.asignaturas = [];
+            this.asignaturaSeleccionada = null;
         });
     }
     recuperarCiclos() {
         this.evaluacionService.recuperarCiclosDocente(this.docenteSeleccionado.idDocente).then(resp => {
             this.ciclos = resp;
+            this.cicloSeleccionado = null;
+            this.asignaturas = [];
+            this.asignaturaSeleccionada = null;
         });
     }
     recuperarAsignaturas() {
         this.evaluacionService.asignaturaDocenteCiclo(this.docenteSeleccionado.idDocente, this.cicloSeleccionado.idCiclo).then(resp => {
             this.asignaturas = resp;
+            this.asignaturaSeleccionada = null;
+
         });
     }
     recuperarEvaluacion() {
@@ -57,10 +70,10 @@ export class EvaluacionComponent implements OnInit {
     }
     ordenarReporte() {
         let ambitos = [];
-
+        this.promediototal = 0;
         this.evaluacion.forEach(element => {
             ambitos.push(element.nombreAmbito);
-            this.promediototal += +element.notaPonderada;
+            this.promediototal += parseFloat(element.notaPonderada);
         });
         this.promediototal = this.promediototal / ambitos.length;
         this.promediototal = this.promediototal.toFixed(2);

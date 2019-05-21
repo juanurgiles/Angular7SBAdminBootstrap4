@@ -9,10 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { EvaluacionService } from './servicio/evaluacion.service';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import {TableModule} from 'primeng/table';
+import { InformeCarreraComponent } from './informexcarrera.component';
 
 @NgModule({
     imports: [PDFExportModule, DropdownModule, TableModule, FormsModule, CommonModule, EvaluacionRoutingModule, PageHeaderModule],
-    declarations: [EvaluacionComponent]
+    declarations: [EvaluacionComponent, InformeCarreraComponent]
 })
 export class EvaluacionModule  {
 
